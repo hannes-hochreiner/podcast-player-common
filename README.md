@@ -1,6 +1,6 @@
 # Podcast Player Common Library
 
-This library contains common objects used by the Podcast Player frontends and backends.
+This library contains common objects used by the [Podcast Player](https://github.com/hannes-hochreiner/podcast-player) frontends and backends.
 
 ## License
 
