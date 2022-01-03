@@ -8,7 +8,7 @@ use std::convert::TryFrom;
 use tokio_postgres::Row;
 use uuid::Uuid;
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
 pub struct ItemVal {
     pub id: Uuid,
     pub title: String,

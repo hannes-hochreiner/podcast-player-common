@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
 pub struct ItemMeta {
     pub id: Uuid,
     pub new: bool,
@@ -11,7 +11,7 @@ pub struct ItemMeta {
     pub play_count: u32,
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
 pub enum DownloadStatus {
     NotRequested,
     Pending,

@@ -2,7 +2,7 @@ use super::{item_meta::DownloadStatus, ItemMeta, ItemVal};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
 pub struct ItemKeys {
     pub id: Uuid,
     pub year_month: String,
