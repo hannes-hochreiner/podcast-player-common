@@ -4,7 +4,8 @@ pub mod item_val;
 
 use chrono::{DateTime, FixedOffset};
 use item_keys::ItemKeys;
-use item_meta::{DownloadStatus, ItemMeta};
+pub use item_meta::DownloadStatus;
+use item_meta::ItemMeta;
 use item_val::ItemVal;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
