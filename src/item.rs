@@ -43,6 +43,10 @@ impl Item {
         self.regenerate_keys();
     }
 
+    pub fn get_val_update(&self) -> &DateTime<FixedOffset> {
+        &self.val.update_ts
+    }
+
     pub fn get_download(&self) -> bool {
         self.meta.download
     }
@@ -106,6 +110,7 @@ impl From<&ItemVal> for Item {
             download_status: DownloadStatus::NotRequested,
             current_time: None,
             play_count: 0,
+            synced: false,
         };
         let keys = ItemKeys::new_from_val_meta(&val, &meta);
 

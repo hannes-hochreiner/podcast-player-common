@@ -9,6 +9,7 @@ pub struct ItemMeta {
     pub download_status: DownloadStatus,
     pub current_time: Option<f64>,
     pub play_count: u32,
+    pub synced: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
