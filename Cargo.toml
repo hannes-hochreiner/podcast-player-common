@@ -10,7 +10,7 @@ edition = "2021"
 anyhow = "1"
 tokio-postgres = { version = "0", features = ["with-uuid-0_8", "with-chrono-0_4"], optional = true }
 uuid = { version = "0.8", features = ["v4", "serde"] }
-serde = "1"
+serde = { version = "1", features = ["serde_derive"] }
 chrono = { version = "0", features = ["serde"] }
 
 [package.metadata.release]
