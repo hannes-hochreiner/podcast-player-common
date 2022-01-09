@@ -22,6 +22,10 @@ impl Item {
         self.val.id
     }
 
+    pub fn get_channel_id(&self) -> &Uuid {
+        &self.val.channel_id
+    }
+
     pub fn get_title(&self) -> String {
         self.val.title.clone()
     }
