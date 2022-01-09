@@ -26,6 +26,8 @@ impl From<&ChannelVal> for Channel {
                 id: val.id,
                 active: false,
                 synced: false,
+                playback_rate: 1.5,
+                volume: 0.5,
             },
         }
     }
