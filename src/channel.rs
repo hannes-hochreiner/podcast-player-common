@@ -3,7 +3,7 @@ pub mod channel_val;
 
 use channel_meta::ChannelMeta;
 use channel_val::ChannelVal;
-use chrono::{DateTime, FixedOffset};
+use chrono::{DateTime, FixedOffset, Utc};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -23,11 +23,13 @@ impl From<&ChannelVal> for Channel {
         Self {
             val: val.clone(),
             meta: ChannelMeta {
-                id: val.id,
+                id: uuid::Uuid::new_v4(),
+                channel_id: val.id,
                 active: false,
                 synced: false,
                 playback_rate: 1.5,
                 volume: 0.5,
+                update_ts: Utc::now().into(),
             },
         }
     }

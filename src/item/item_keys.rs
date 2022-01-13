@@ -17,7 +17,7 @@ impl ItemKeys {
             _ => String::from("false"),
         };
         let download_ok = match &meta.download_status {
-            &DownloadStatus::Ok(_) => String::from("true"),
+            &DownloadStatus::Ok => String::from("true"),
             _ => String::from("false"),
         };
 

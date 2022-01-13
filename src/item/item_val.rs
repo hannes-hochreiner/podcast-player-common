@@ -16,16 +16,13 @@ pub struct ItemVal {
     pub enclosure_type: String,
     pub enclosure_url: String,
     pub channel_id: Uuid,
+    pub size: u64,
     pub update_ts: DateTime<FixedOffset>,
 }
 
 impl ItemVal {
     pub fn needs_update(&self, enclosure_type: &String, enclosure_url: &String) -> bool {
-        if &self.enclosure_type == enclosure_type && &self.enclosure_url == enclosure_url {
-            false
-        } else {
-            true
-        }
+        !(&self.enclosure_type == enclosure_type && &self.enclosure_url == enclosure_url)
     }
 }
 
@@ -41,6 +38,7 @@ impl TryFrom<&Row> for ItemVal {
             enclosure_type: row.try_get("enclosure_type")?,
             enclosure_url: row.try_get("enclosure_url")?,
             channel_id: row.try_get("channel_id")?,
+            size: row.try_get("size")?,
             update_ts: row.try_get("update_ts")?,
         })
     }

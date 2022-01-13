@@ -9,24 +9,27 @@ use tokio_postgres::Row;
 use uuid::Uuid;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct FeedVal {
+pub struct FeedUrl {
     pub id: Uuid,
+    pub feed_id: Uuid,
     pub url: String,
     pub status: Option<u16>,
-    pub parent: Option<Uuid>,
+    pub manual: bool,
     pub update_ts: DateTime<FixedOffset>,
 }
 
 #[cfg(feature = "tokio-postgres")]
-impl TryFrom<&Row> for FeedVal {
+impl TryFrom<&Row> for FeedUrl {
     type Error = anyhow::Error;
 
     fn try_from(row: &Row) -> Result<Self, Self::Error> {
         Ok(Self {
             id: row.try_get("id")?,
+            feed_id: row.try_get("feed_id")?,
             url: row.try_get("url")?,
-            update_ts: row.try_get("update_ts")?,
             status: row.try_get("status")?,
+            manual: row.try_get("manual")?,
+            update_ts: row.try_get("update_ts")?,
         })
     }
 }

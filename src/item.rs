@@ -2,7 +2,7 @@ pub mod item_keys;
 pub mod item_meta;
 pub mod item_val;
 
-use chrono::{DateTime, FixedOffset};
+use chrono::{DateTime, FixedOffset, Utc};
 use item_keys::ItemKeys;
 pub use item_meta::DownloadStatus;
 use item_meta::ItemMeta;
@@ -108,13 +108,15 @@ impl Item {
 impl From<&ItemVal> for Item {
     fn from(val: &ItemVal) -> Self {
         let meta = ItemMeta {
-            id: val.id,
+            id: Uuid::new_v4(),
+            item_id: val.id,
             new: true,
             download: false,
             download_status: DownloadStatus::NotRequested,
             current_time: None,
             play_count: 0,
             synced: false,
+            update_ts: Utc::now().into(),
         };
         let keys = ItemKeys::new_from_val_meta(&val, &meta);
 

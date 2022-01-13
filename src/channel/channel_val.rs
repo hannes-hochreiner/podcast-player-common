@@ -20,11 +20,7 @@ pub struct ChannelVal {
 
 impl ChannelVal {
     pub fn needs_update(&self, description: &String, image: &Option<String>) -> bool {
-        if &self.description == description && &self.image == image {
-            false
-        } else {
-            true
-        }
+        !(&self.description == description && &self.image == image)
     }
 }
 
@@ -35,8 +31,8 @@ impl TryFrom<&Row> for ChannelVal {
     fn try_from(row: &Row) -> Result<Self, Self::Error> {
         Ok(Self {
             id: row.try_get("id")?,
-            description: row.try_get("description")?,
             title: row.try_get("title")?,
+            description: row.try_get("description")?,
             image: match row.try_get("image") {
                 Ok(i) => Some(i),
                 Err(_) => None,
