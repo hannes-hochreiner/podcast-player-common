@@ -1,10 +1,10 @@
-#[cfg(feature = "tokio-postgres")]
+#[cfg(feature = "db")]
 use anyhow::Result;
 use chrono::{DateTime, FixedOffset};
 use serde::{Deserialize, Serialize};
-#[cfg(feature = "tokio-postgres")]
+#[cfg(feature = "db")]
 use std::convert::TryFrom;
-#[cfg(feature = "tokio-postgres")]
+#[cfg(feature = "db")]
 use tokio_postgres::Row;
 use uuid::Uuid;
 
@@ -16,7 +16,7 @@ pub struct ItemVal {
     pub enclosure_type: String,
     pub enclosure_url: String,
     pub channel_id: Uuid,
-    pub size: u64,
+    pub size: i64,
     pub update_ts: DateTime<FixedOffset>,
 }
 
@@ -26,7 +26,7 @@ impl ItemVal {
     }
 }
 
-#[cfg(feature = "tokio-postgres")]
+#[cfg(feature = "db")]
 impl TryFrom<&Row> for ItemVal {
     type Error = anyhow::Error;
 

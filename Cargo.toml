@@ -9,9 +9,14 @@ edition = "2021"
 [dependencies]
 anyhow = "1"
 tokio-postgres = { version = "0", features = ["with-uuid-0_8", "with-chrono-0_4"], optional = true }
+postgres-types = { version = "0", features = ["derive"], optional = true }
 uuid = { version = "0.8", features = ["v4", "serde"] }
 serde = { version = "1", features = ["serde_derive"] }
 chrono = { version = "0", features = ["serde"] }
+
+[features]
+default = ["db"]
+db = ["tokio-postgres", "postgres-types"]
 
 [package.metadata.release]
 publish = false

@@ -1,10 +1,10 @@
-#[cfg(feature = "tokio-postgres")]
+#[cfg(feature = "db")]
 use anyhow::Result;
 use chrono::{DateTime, FixedOffset};
 use serde::{Deserialize, Serialize};
-#[cfg(feature = "tokio-postgres")]
+#[cfg(feature = "db")]
 use std::convert::TryFrom;
-#[cfg(feature = "tokio-postgres")]
+#[cfg(feature = "db")]
 use tokio_postgres::Row;
 use uuid::Uuid;
 
@@ -13,13 +13,13 @@ pub struct FeedUrl {
     pub id: Uuid,
     pub feed_id: Uuid,
     pub url: String,
-    pub status: Option<u16>,
+    pub status: Option<i16>,
     pub manual: bool,
     pub synced: bool,
     pub update_ts: DateTime<FixedOffset>,
 }
 
-#[cfg(feature = "tokio-postgres")]
+#[cfg(feature = "db")]
 impl TryFrom<&Row> for FeedUrl {
     type Error = anyhow::Error;
 

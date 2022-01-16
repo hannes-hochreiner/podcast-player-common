@@ -1,10 +1,12 @@
-#[cfg(feature = "tokio-postgres")]
+#[cfg(feature = "db")]
 use anyhow::Result;
 use chrono::{DateTime, FixedOffset};
 use serde::{Deserialize, Serialize};
-#[cfg(feature = "tokio-postgres")]
+#[cfg(feature = "db")]
 use std::convert::TryFrom;
-#[cfg(feature = "tokio-postgres")]
+#[cfg(feature = "db")]
+use tokio_postgres::types::{FromSql, ToSql};
+#[cfg(feature = "db")]
 use tokio_postgres::Row;
 use uuid::Uuid;
 
@@ -21,7 +23,7 @@ pub struct ItemMeta {
     pub update_ts: DateTime<FixedOffset>,
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, FromSql, ToSql)]
 pub enum DownloadStatus {
     NotRequested,
     Pending,
@@ -30,7 +32,7 @@ pub enum DownloadStatus {
     Error,
 }
 
-#[cfg(feature = "tokio-postgres")]
+#[cfg(feature = "db")]
 impl TryFrom<&Row> for ItemMeta {
     type Error = anyhow::Error;
 
