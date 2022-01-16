@@ -15,6 +15,7 @@ pub struct FeedUrl {
     pub url: String,
     pub status: Option<u16>,
     pub manual: bool,
+    pub synced: bool,
     pub update_ts: DateTime<FixedOffset>,
 }
 
@@ -29,6 +30,7 @@ impl TryFrom<&Row> for FeedUrl {
             url: row.try_get("url")?,
             status: row.try_get("status")?,
             manual: row.try_get("manual")?,
+            synced: row.try_get("synced")?,
             update_ts: row.try_get("update_ts")?,
         })
     }

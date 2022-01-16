@@ -11,9 +11,8 @@ use uuid::Uuid;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct FeedVal {
     pub id: Uuid,
-    pub url: String,
-    pub status: Option<u16>,
-    pub parent: Option<Uuid>,
+    pub title: String,
+    pub synced: bool,
     pub update_ts: DateTime<FixedOffset>,
 }
 
@@ -24,9 +23,9 @@ impl TryFrom<&Row> for FeedVal {
     fn try_from(row: &Row) -> Result<Self, Self::Error> {
         Ok(Self {
             id: row.try_get("id")?,
-            url: row.try_get("url")?,
+            title: row.try_get("title")?,
+            synced: row.try_get("synced")?,
             update_ts: row.try_get("update_ts")?,
-            status: row.try_get("status")?,
         })
     }
 }
