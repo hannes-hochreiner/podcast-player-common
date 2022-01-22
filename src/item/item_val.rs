@@ -27,19 +27,31 @@ impl ItemVal {
 }
 
 #[cfg(feature = "db")]
-impl TryFrom<&Row> for ItemVal {
-    type Error = anyhow::Error;
+mod db {
+    use anyhow::Result;
+    use std::convert::TryFrom;
+    use tokio_postgres::Row;
 
-    fn try_from(row: &Row) -> Result<Self, Self::Error> {
-        Ok(Self {
-            id: row.try_get("id")?,
-            title: row.try_get("title")?,
-            date: row.try_get("date")?,
-            enclosure_type: row.try_get("enclosure_type")?,
-            enclosure_url: row.try_get("enclosure_url")?,
-            channel_id: row.try_get("channel_id")?,
-            size: row.try_get("size")?,
-            update_ts: row.try_get("update_ts")?,
-        })
+    impl TryFrom<&Row> for super::ItemVal {
+        type Error = anyhow::Error;
+
+        fn try_from(row: &Row) -> Result<Self, Self::Error> {
+            Ok(Self {
+                id: row.try_get("id")?,
+                title: row.try_get("title")?,
+                date: row.try_get("date")?,
+                enclosure_type: row.try_get("enclosure_type")?,
+                enclosure_url: row.try_get("enclosure_url")?,
+                channel_id: row.try_get("channel_id")?,
+                size: row.try_get("size")?,
+                update_ts: row.try_get("update_ts")?,
+            })
+        }
+    }
+
+    impl crate::DbInfo for super::ItemVal {
+        fn table_name() -> &'static str {
+            "items"
+        }
     }
 }

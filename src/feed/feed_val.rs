@@ -10,7 +10,7 @@ pub struct FeedVal {
     pub update_ts: DateTime<FixedOffset>,
 }
 
-#[cfg(feature = "tokio-postgres")]
+#[cfg(feature = "db")]
 mod db {
     use anyhow::Result;
     use std::convert::TryFrom;
@@ -29,7 +29,7 @@ mod db {
         }
     }
 
-    impl super::super::super::DbInfo for super::FeedVal {
+    impl crate::DbInfo for super::FeedVal {
         fn table_name() -> &'static str {
             "feeds"
         }
