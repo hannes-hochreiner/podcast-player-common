@@ -44,7 +44,7 @@ mod db {
 
     impl crate::DbInfo for super::ChannelVal {
         fn table_name() -> &'static str {
-            "channels"
+            "channel_val"
         }
     }
 }

@@ -51,7 +51,7 @@ mod db {
 
     impl crate::DbInfo for super::ItemVal {
         fn table_name() -> &'static str {
-            "items"
+            "item_val"
         }
     }
 }

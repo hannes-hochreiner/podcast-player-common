@@ -31,7 +31,7 @@ mod db {
 
     impl crate::DbInfo for super::FeedVal {
         fn table_name() -> &'static str {
-            "feeds"
+            "feed_val"
         }
     }
 }
