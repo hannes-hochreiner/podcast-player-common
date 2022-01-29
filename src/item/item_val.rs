@@ -1,11 +1,5 @@
-#[cfg(feature = "db")]
-use anyhow::Result;
 use chrono::{DateTime, FixedOffset};
 use serde::{Deserialize, Serialize};
-#[cfg(feature = "db")]
-use std::convert::TryFrom;
-#[cfg(feature = "db")]
-use tokio_postgres::Row;
 use uuid::Uuid;
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
