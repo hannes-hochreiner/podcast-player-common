@@ -2,6 +2,7 @@
 use anyhow::Result;
 use chrono::{DateTime, FixedOffset};
 use serde::{Deserialize, Serialize};
+use std::cmp::Ordering;
 #[cfg(feature = "db")]
 use std::convert::TryFrom;
 #[cfg(feature = "db")]
@@ -18,6 +19,55 @@ pub struct FeedUrl {
     pub synced: bool,
     pub update_ts: DateTime<FixedOffset>,
 }
+
+impl Ord for FeedUrl {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        match (self.status, &other.status) {
+            (Some(status), None) => {
+                if status >= 200 && status < 300 {
+                    return Ordering::Greater;
+                } else {
+                    return Ordering::Less;
+                }
+            }
+            (Some(status_self), Some(status_other)) => {
+                if !(status_self >= 200 && status_self < 300)
+                    && (*status_other >= 200 && *status_other < 300)
+                {
+                    return Ordering::Less;
+                } else if (status_self >= 200 && status_self < 300)
+                    && !(*status_other >= 200 && *status_other < 300)
+                {
+                    return Ordering::Greater;
+                } else {
+                    return Ordering::Equal;
+                }
+            }
+            (None, Some(status)) => {
+                if *status >= 200 && *status < 300 {
+                    return Ordering::Less;
+                } else {
+                    return Ordering::Greater;
+                }
+            }
+            (None, None) => return Ordering::Equal,
+        }
+    }
+}
+
+impl PartialOrd for FeedUrl {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl PartialEq for FeedUrl {
+    fn eq(&self, other: &Self) -> bool {
+        self.cmp(other) == Ordering::Equal
+    }
+}
+
+impl Eq for FeedUrl {}
 
 #[cfg(feature = "db")]
 impl TryFrom<&Row> for FeedUrl {
