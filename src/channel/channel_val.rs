@@ -32,10 +32,7 @@ mod db {
                 id: row.try_get("id")?,
                 title: row.try_get("title")?,
                 description: row.try_get("description")?,
-                image: match row.try_get("image") {
-                    Ok(i) => Some(i),
-                    Err(_) => None,
-                },
+                image: row.try_get("image")?,
                 feed_id: row.try_get("feed_id")?,
                 update_ts: row.try_get("update_ts")?,
             })
