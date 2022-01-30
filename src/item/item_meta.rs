@@ -23,7 +23,8 @@ pub struct ItemMeta {
     pub update_ts: DateTime<FixedOffset>,
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, FromSql, ToSql)]
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
+#[cfg_attr(feature = "db", derive(FromSql, ToSql))]
 pub enum DownloadStatus {
     NotRequested,
     Pending,
