@@ -84,12 +84,12 @@ impl Item {
         self.keys.year_month.clone()
     }
 
-    pub fn set_current_time(&mut self, time: Option<f64>) {
-        self.meta.current_time = time;
+    pub fn set_playback_time(&mut self, time: Option<f64>) {
+        self.meta.playback_time = time;
     }
 
-    pub fn get_current_time(&self) -> Option<f64> {
-        self.meta.current_time.clone()
+    pub fn get_playback_time(&self) -> Option<f64> {
+        self.meta.playback_time.clone()
     }
 
     fn regenerate_keys(&mut self) {
@@ -113,7 +113,7 @@ impl From<&ItemVal> for Item {
             new: true,
             download: false,
             download_status: DownloadStatus::NotRequested,
-            current_time: None,
+            playback_time: None,
             play_count: 0,
             synced: false,
             update_ts: Utc::now().into(),
