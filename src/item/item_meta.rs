@@ -43,7 +43,7 @@ impl TryFrom<&Row> for ItemMeta {
             new: row.try_get("new")?,
             download: row.try_get("download")?,
             download_status: row.try_get("download_status")?,
-            playback_time: row.try_get("current_time")?,
+            playback_time: row.try_get("playback_time")?,
             play_count: row.try_get("play_count")?,
             synced: row.try_get("synced")?,
             update_ts: row.try_get("update_ts")?,
