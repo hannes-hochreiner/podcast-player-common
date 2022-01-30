@@ -78,7 +78,10 @@ impl TryFrom<&Row> for FeedUrl {
             id: row.try_get("id")?,
             feed_id: row.try_get("feed_id")?,
             url: row.try_get("url")?,
-            status: row.try_get("status")?,
+            status: match row.try_get("status") {
+                Ok(val) => Some(val),
+                Err(_) => None,
+            },
             manual: row.try_get("manual")?,
             synced: row.try_get("synced")?,
             update_ts: row.try_get("update_ts")?,
