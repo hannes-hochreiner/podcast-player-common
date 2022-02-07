@@ -51,26 +51,6 @@ impl Item {
         &self.val.update_ts
     }
 
-    pub fn get_download(&self) -> bool {
-        self.meta.download
-    }
-
-    pub fn set_download(&mut self, download: bool) {
-        self.meta.download = download;
-        self.meta.new = false;
-
-        match (&self.meta.download, &self.meta.download_status) {
-            (true, DownloadStatus::NotRequested) => {
-                self.meta.download_status = DownloadStatus::Pending
-            }
-            (false, DownloadStatus::Pending) => {
-                self.meta.download_status = DownloadStatus::NotRequested
-            }
-            (_, _) => {}
-        }
-        self.regenerate_keys();
-    }
-
     pub fn get_download_status(&self) -> DownloadStatus {
         self.meta.download_status.clone()
     }
@@ -111,7 +91,6 @@ impl From<&ItemVal> for Item {
             id: Uuid::new_v4(),
             item_id: val.id,
             new: true,
-            download: false,
             download_status: DownloadStatus::NotRequested,
             playback_time: None,
             play_count: 0,

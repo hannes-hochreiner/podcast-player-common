@@ -12,8 +12,8 @@ pub struct ItemKeys {
 
 impl ItemKeys {
     pub fn new_from_val_meta(val: &ItemVal, meta: &ItemMeta) -> Self {
-        let download_required = match (&meta.download, &meta.download_status) {
-            (true, DownloadStatus::Pending) => String::from("true"),
+        let download_required = match &meta.download_status {
+            DownloadStatus::Pending => String::from("true"),
             _ => String::from("false"),
         };
         let download_ok = match &meta.download_status {

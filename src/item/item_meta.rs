@@ -15,7 +15,6 @@ pub struct ItemMeta {
     pub id: Uuid,
     pub item_id: Uuid,
     pub new: bool,
-    pub download: bool,
     pub download_status: DownloadStatus,
     pub playback_time: Option<f64>,
     pub play_count: u32,
@@ -42,7 +41,6 @@ impl TryFrom<&Row> for ItemMeta {
             id: row.try_get("id")?,
             item_id: row.try_get("item_id")?,
             new: row.try_get("new")?,
-            download: row.try_get("download")?,
             download_status: row.try_get("download_status")?,
             playback_time: match row.try_get("playback_time") {
                 Ok(val) => Some(val),
