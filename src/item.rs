@@ -56,6 +56,7 @@ impl Item {
     }
 
     pub fn set_download_status(&mut self, download_status: DownloadStatus) {
+        self.meta.new = false;
         self.meta.download_status = download_status;
         self.regenerate_keys();
     }
