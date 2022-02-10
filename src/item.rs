@@ -84,6 +84,10 @@ impl Item {
     pub fn get_play_count(&self) -> u32 {
         self.meta.play_count
     }
+
+    pub fn get_size(&self) -> i64 {
+        self.val.size
+    }
 }
 
 impl From<&ItemVal> for Item {
